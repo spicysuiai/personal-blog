@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>个人博客</title>
+    <link rel="stylesheet" href="style.css" />
+    <!-- Load the marked library from CDN for Markdown parsing -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="scripts/main.js"></script>
+  </head>
+  <body>
+    <header>
+      <h1 id="blog-title">个人博客</h1>
+      <p id="blog-description"></p>
+      <nav>
+        <a href="index.html">首页</a>
+        <a href="admin.html">发布 / 管理</a>
+      </nav>
+    </header>
+    <main>
+      <div id="posts"></div>
+    </main>
+    <footer>
+      &copy; <span id="year"></span>
+    </footer>
+    <script>
+      (async () => {
+        // Load configuration from GitHub or local file
+        await loadConfig();
+        // Update the page title and header
+        document.title = window.config.title || '个人博客';
+        document.getElementById('blog-title').innerText = window.config.title || '个人博客';
+        document.getElementById('blog-description').innerText = window.config.description || '';
+        document.getElementById('year').innerText = new Date().getFullYear();
+        // Render the list of posts
+        await renderPostsList();
+      })();
+    </script>
+  </body>
+</html>
